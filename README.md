@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/18028a2a-1698-479b-b2c9-7637be642535/deploy-status)](https://app.netlify.com/sites/practical-aryabhata-a32269/deploys)
+
 # CG Rank
 
 CG Rank is a website that can automatically integrate your current ranking on [codingame.com](https://www.codingame.com/home) into a resumé (or any other .docx file) that contains one of several predefined template strings. CG Rank is not affiliated with codingame.com.
