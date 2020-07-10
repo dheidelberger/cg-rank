@@ -7,5 +7,14 @@ module.exports = {
             },
         },
     },
+    productionSourceMap: false,
     transpileDependencies: ['vuetify'],
+    configureWebpack: {
+        optimization: {
+            splitChunks: {
+                minSize: 10000,
+                maxSize: 230000,
+            },
+        },
+    },
 };
