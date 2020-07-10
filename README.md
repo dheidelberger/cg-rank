@@ -1,6 +1,6 @@
 # CG Rank
 
-CG Rank is a website that can automatically integrate your current ranking on [codingame.com](https://www.codingame.com/home) into a resumé (or any other .docx file) that contains one of several predefined template strings.
+CG Rank is a website that can automatically integrate your current ranking on [codingame.com](https://www.codingame.com/home) into a resumé (or any other .docx file) that contains one of several predefined template strings. CG Rank is not affiliated with codingame.com.
 
 If all you want to do is use CG Rank with your resumé, you should visit the live site at [https://www.cgrank.com](https://www.cgrank.com/). If you are interested in forking or contributing to CG Rank site, read on...
 
@@ -39,7 +39,7 @@ Each tag has the following structure:
 -   `tag` is the printed name of the tag
 -   `description` is the printed description
 -   `regex` is a regular expression string that is used to see if a given template string matches this tag. The parser takes each tag that docxtemplater gives it, and loops through all its known tags using the regex to find the appropriate tag.
--   `priority` is used to sort the tags in order of importance. The regex for a tag that doesn't take additional parameters can sometimes override the regex for a tag with extra parameters. Priority ensures that more specific tags get checked first. Can be a number from 0-100, with lower numbers getting the prirority. For now, tags with no parameters are 100, tags with 1 parameter are 50, and tags with two parameters are 10.
+-   `priority` is used to sort the tags in order of importance. The regex for a tag that doesn't take additional parameters can sometimes override the regex for a tag with extra parameters. Priority ensures that more specific tags get checked first. Can be a number from 0-100, with lower numbers getting highest prirority. For now, tags with no parameters are 100, tags with one parameter are 50, and tags with two parameters are 10.
 -   `transform` is a function that gets passed to the tag to transform the data. `x` is the data returned from the serverless function, `match` is the result of running `.replace(REGEX)` on the tag name JSON stringified. This is a bit convoluted. The tag name is run through a replace function as follows:
 
 ```
