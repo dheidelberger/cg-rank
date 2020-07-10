@@ -34,9 +34,34 @@
     </v-row>
     <v-row class="text-left" justify="center">
       <v-col cols="8">
-        <p
-          class="text-subtitle-1"
-        >The source code for this site is available on GitHub. It is licensed under an MIT License</p>
+        <p class="text-subtitle-1">
+          The source code for this site is
+          <a
+            href="https://github.com/dheidelberger/cg-rank/tree/master"
+            target="_none"
+          >available on GitHub</a>. It is licensed under an
+          <a
+            href="https://github.com/dheidelberger/cg-rank/blob/master/LICENSE.md"
+            target="_blank"
+          >MIT License</a>
+        </p>
+      </v-col>
+    </v-row>
+    <v-row class="text-left" justify="center">
+      <v-col cols="8">
+        <h5 class="text-h5">Privacy</h5>
+      </v-col>
+    </v-row>
+    <v-row class="text-left" justify="center">
+      <v-col cols="8">
+        <p class="text-subtitle-1">
+          CG Rank is hosted using Netlify. CG Rank does not track or store any of your data. However, Netlify does store visitor IP addresses for 30 days.
+          <a
+            href="https://www.netlify.com/gdpr/"
+            target="_blank"
+          >More information</a>
+          about Netlify's privacy policy,
+        </p>
       </v-col>
     </v-row>
   </v-container>
@@ -48,8 +73,6 @@ export default {
   name: "Home",
 
   data: () => ({
-    loadingScore: true,
-    test: "Test text",
     cgRank: "loading...",
     cocRank: "loading..."
   }),
@@ -61,7 +84,7 @@ export default {
           profile: "typingm"
         }
       });
-      console.log(response);
+
       this.cgRank = `${response.data.ranking.codingame.rank.toLocaleString()}/${response.data.ranking.codingame.totalPlayers.toLocaleString()}`;
       this.cocRank = `${response.data.ranking.clashOfCode.rank.toLocaleString()}/${response.data.ranking.clashOfCode.totalPlayers.toLocaleString()}`;
     } catch (error) {

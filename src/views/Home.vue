@@ -134,7 +134,6 @@ export default {
   },
   methods: {
     clicked: async function() {
-      console.log(`The profile is: ${this.profile}`);
       this.btnLoading = true;
       try {
         const response = await axios.get(`.netlify/functions/get-score`, {
@@ -143,8 +142,6 @@ export default {
             profile: this.profile
           }
         });
-        console.log(response);
-        // let theData = JSON.parse(JSON.stringify(response.data));
         this.$store.commit("addUserData", response.data);
         this.gotUser = true;
       } catch (error) {
