@@ -51,22 +51,3 @@ Supported Tags:
 {cocPercOrd}
 
 {date::MOMENT_JS_DATE_STRING}
-
-<!-- var docs = document.getElementById('doc');
-function generate() {
-    var reader = new FileReader();
-    if (docs.files.length === 0) {
-        alert("No files selected")
-    }
-    reader.readAsBinaryString(docs.files.item(0));
-
-    reader.onerror = function (evt) {
-        console.log("error reading file", evt);
-        alert("error reading file" + evt)
-    }
-    reader.onload = function (evt) {
-        const content = evt.target.result;
-        var zip = new PizZip(content);
-        // Same code as in the main HTML example.
-    }
-} -->

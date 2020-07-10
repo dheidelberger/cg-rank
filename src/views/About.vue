@@ -27,6 +27,18 @@
         <p class="text-subtitle-1 mb-1 pb-1">Current Clash of Code rank: {{ cocRank }}</p>
       </v-col>
     </v-row>
+    <v-row class="text-left" justify="center">
+      <v-col cols="8">
+        <h5 class="text-h5">License</h5>
+      </v-col>
+    </v-row>
+    <v-row class="text-left" justify="center">
+      <v-col cols="8">
+        <p
+          class="text-subtitle-1"
+        >The source code for this site is available on GitHub. It is licensed under an MIT License</p>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
