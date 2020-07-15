@@ -15,7 +15,7 @@ Once you have cloned the repository, you can run `npm run serve` to debug the si
 ### Serverless Netlify function
 
 The Netlify serverless function returns the following information when given a Codingame profile name:
-`{handle,name,id,[avatar],ranking:{codingame:{rank,totalPlayers},clashOfCode:{rank,totalPlayers}}}`
+`{handle,name,id,avatar,ranking:{codingame:{rank,totalPlayers},clashOfCode:{rank,totalPlayers}}}`
 Avatar is optional and is only returned if there is an avatar associated with that profile.
 
 ### Template Tags
@@ -45,13 +45,13 @@ Each tag has the following structure:
 -   `transform` is a function that gets passed to the tag to transform the data. `x` is the data returned from the serverless function, `match` is the result of running `.replace(REGEX)` on the tag name JSON stringified. This is a bit convoluted. The tag name is run through a replace function as follows:
 
 ```
-TAGNAME = TAGNAME.replace(REGEX, (match, p1, p2, p3) => {
+TEMPLATESTRING = TEMPLATESTRING.replace(REGEX, (match, p1, p2, p3) => {
     const newText = tag.transform(RANKINGDATA, JSON.stringify([p1, p2, p3]));
     return newText;
 });
 ```
 
-Note that the way replace callback functions are created when using regex, the individual matching groups are passed as parameters rather than as an array. None of the tags currently use more than three matching groups, so we just need to pass p1-p3 to the replace function. For tags with fewer than three matching groups, the extra matching groups are undefined (as in, their values are not defined or guaranteed to be consistent, they aren't literally the Javascript value "undefined")
+Note that the way replace callback functions are created when using regex, the individual matching groups are passed as parameters rather than as an array. There could be as many params as there are matching groups, but since none of the tags currently use more than three matching groups, we just need to pass p1-p3 to the replace function. For tags with fewer than three matching groups, the extra matching groups are undefined (as in, their values are not defined or guaranteed to be consistent, they aren't literally the Javascript value "undefined")
 
 ### Contributing
 

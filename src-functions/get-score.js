@@ -174,7 +174,7 @@ async function getHighScore(profileId) {
  * @async
  * @function getScore
  * @param {string} profile - Should be in the query string
- * @returns {Object} {handle,name,id,[avatar],ranking:{codingame:{rank,totalPlayers},clashOfCode:{rank,totalPlayers}}}
+ * @returns {Object} {handle,name,id,avatar,ranking:{codingame:{rank,totalPlayers},clashOfCode:{rank,totalPlayers}}}
  */
 const getScore = async (event, context) => {
     const profile = event.queryStringParameters['profile'];
