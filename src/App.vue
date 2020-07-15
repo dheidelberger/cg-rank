@@ -60,9 +60,11 @@ export default {
 .route {
   text-decoration: none;
 }
-.router-link-exact-active {
+.router-link-exact-active > button {
   /* background-color: #404040; */
   /* background-color: #ff0000; */
-  text-decoration: underline;
+
+  color: #ffc107;
+  font-weight: bold;
 }
 </style>
