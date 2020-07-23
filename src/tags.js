@@ -2,6 +2,10 @@
 const moment = require('moment');
 const indicator = require('ordinal/indicator');
 
+const STANDARD_THREE_PARAM_PRIORITY = 10;
+const STANDARD_TWO_PARAM_PRIORITY = 50;
+const STANDARD_ONE_PARAM_PRIORITY = 100;
+
 //Source:
 //https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
 function numberWithCommas(x, separator) {
@@ -33,7 +37,7 @@ let tags = {
         tag: 'cgRank',
         description: 'Current ranking on codingame.com with no formatting',
         regex: '(cgRank)',
-        priority: 100,
+        priority: STANDARD_ONE_PARAM_PRIORITY,
         transform: (x) => x.ranking.codingame.rank,
     },
     'cgRank::SEPARATOR': {
@@ -41,7 +45,7 @@ let tags = {
         description:
             'Current ranking on codingame.com with thousands places separated by SEPARATOR. For example, rank 3000 and tag cgRank::, leads to 3,000.',
         regex: '(cgRank)::(.*?)',
-        priority: 50,
+        priority: STANDARD_TWO_PARAM_PRIORITY,
         transform: (x, match) =>
             numberWithCommas(x.ranking.codingame.rank, JSON.parse(match)[1]),
     },
@@ -49,7 +53,7 @@ let tags = {
         tag: 'cocRank',
         description: 'Current ranking in Clash of Code with no formatting',
         regex: '(cocRank)',
-        priority: 100,
+        priority: STANDARD_ONE_PARAM_PRIORITY,
         transform: (x) => x.ranking.clashOfCode.rank,
     },
     'cocRank::SEPARATOR': {
@@ -57,7 +61,7 @@ let tags = {
         description:
             'Current ranking in Clash of Code with thousands places separated by SEPARATOR',
         regex: '(cocRank)::(.*?)',
-        priority: 50,
+        priority: STANDARD_TWO_PARAM_PRIORITY,
         transform: (x, match) =>
             numberWithCommas(x.ranking.clashOfCode.rank, JSON.parse(match)[1]),
     },
@@ -65,28 +69,28 @@ let tags = {
         tag: 'cgOrd',
         description: `Ordinal for current codingame.com ranking (e.g. "st," "nd," or "rd")`,
         regex: '(cgOrd)',
-        priority: 100,
+        priority: STANDARD_ONE_PARAM_PRIORITY,
         transform: (x) => indicator(x.ranking.codingame.rank),
     },
     cocOrd: {
         tag: 'cocOrd',
         description: `Ordinal for current Clash of Code ranking`,
         regex: '(cocOrd)',
-        priority: 100,
+        priority: STANDARD_ONE_PARAM_PRIORITY,
         transform: (x) => indicator(x.ranking.clashOfCode.rank),
     },
     cgTotal: {
         tag: 'cgTotal',
         description: `Total number of players on codingame.com with no formatting`,
         regex: '(cgTotal)',
-        priority: 100,
+        priority: STANDARD_ONE_PARAM_PRIORITY,
         transform: (x) => x.ranking.codingame.totalPlayers,
     },
     cocTotal: {
         tag: 'cocTotal',
         description: `Total number of players on Clash of Code with no formatting`,
         regex: '(cocTotal)',
-        priority: 100,
+        priority: STANDARD_ONE_PARAM_PRIORITY,
         transform: (x) => x.ranking.clashOfCode.totalPlayers,
     },
     'cgTotal::SEPARATOR': {
@@ -94,7 +98,7 @@ let tags = {
         description:
             'Total number of players on codingame.com with thousands places separated by SEPARATOR',
         regex: '(cgTotal)::(.*?)',
-        priority: 50,
+        priority: STANDARD_TWO_PARAM_PRIORITY,
         transform: (x, match) =>
             numberWithCommas(
                 x.ranking.codingame.totalPlayers,
@@ -106,7 +110,7 @@ let tags = {
         description:
             'Total number of players on Clash of Code with thousands places separated by SEPARATOR',
         regex: '(cocTotal)::(.*?)',
-        priority: 50,
+        priority: STANDARD_TWO_PARAM_PRIORITY,
         transform: (x, match) =>
             numberWithCommas(
                 x.ranking.clashOfCode.totalPlayers,
@@ -117,7 +121,7 @@ let tags = {
         tag: 'cgPerc',
         description: `Codingame.com ranking as a percentile rounded to up to 2 decimal places (e.g. 100th out of 10,000 players is "1" and 100/15,000 is "0.67")`,
         regex: '(cgPerc)',
-        priority: 100,
+        priority: STANDARD_ONE_PARAM_PRIORITY,
         transform: (x) =>
             rounded(
                 (100 * x.ranking.codingame.rank) /
@@ -129,7 +133,7 @@ let tags = {
         tag: 'cgPerc::PLACES',
         description: `Codingame.com ranking as a percentile rounded to up to PLACES decimal places (e.g. 100/15,000 with PLACES=1 is "0.7")`,
         regex: '(cgPerc)::(.*?)',
-        priority: 50,
+        priority: STANDARD_TWO_PARAM_PRIORITY,
         transform: (x, match) =>
             rounded(
                 (100 * x.ranking.codingame.rank) /
@@ -141,7 +145,7 @@ let tags = {
         tag: 'cgPerc::PLACES::DECIMAL',
         description: `Codingame.com ranking as a percentile rounded to up to PLACES decimal places using DECIMAL as a decimal separator (e.g. 100/15,000 with PLACES=1 and DECIMAL=, is "0,7")`,
         regex: `(cgPerc)::(\\d*?)::(.*?)`,
-        priority: 10,
+        priority: STANDARD_THREE_PARAM_PRIORITY,
         transform: (x, match) =>
             rounded(
                 (100 * x.ranking.codingame.rank) /
@@ -155,7 +159,7 @@ let tags = {
         tag: 'cocPerc',
         description: `Clash of Code ranking as a percentile rounded to up to 2 decimal places`,
         regex: '(cocPerc)',
-        priority: 100,
+        priority: STANDARD_ONE_PARAM_PRIORITY,
         transform: (x) =>
             rounded(
                 (100 * x.ranking.clashOfCode.rank) /
@@ -167,7 +171,7 @@ let tags = {
         tag: 'cocPerc::PLACES',
         description: `Clash of Code ranking as a percentile rounded to up to PLACES decimal places`,
         regex: '(cocPerc)::(.*?)',
-        priority: 50,
+        priority: STANDARD_TWO_PARAM_PRIORITY,
         transform: (x, match) =>
             rounded(
                 (100 * x.ranking.clashOfCode.rank) /
@@ -179,7 +183,7 @@ let tags = {
         tag: 'cocPerc::PLACES::DECIMAL',
         description: `Clash of Code ranking as a percentile rounded to up to PLACES decimal places using DECIMAL as a decimal separator`,
         regex: `(cocPerc)::(\\d*?)::(.*?)`,
-        priority: 10,
+        priority: STANDARD_THREE_PARAM_PRIORITY,
         transform: (x, match) =>
             rounded(
                 (100 * x.ranking.clashOfCode.rank) /
@@ -195,7 +199,7 @@ let tags = {
             'MMMM Do YYYY, h:mm:ss a'
         )}"`,
         regex: `(date)::(.*?)`,
-        priority: 10,
+        priority: STANDARD_THREE_PARAM_PRIORITY,
         transform: (x, match) => moment().format(JSON.parse(match)[1]),
     },
 };
