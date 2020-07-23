@@ -10,7 +10,8 @@
             href="https://www.codingame.com"
             target="_blank"
           >codingame.com</a>
-          to your resumé or other .docx file.
+          to your resumé or other .docx file. Use the
+          <router-link to="/playground" class="route" exact>playground</router-link>&nbsp;to see the different tags you can include in your resumé.
         </p>
       </v-col>
     </v-row>
@@ -99,29 +100,29 @@ export default {
     profile: "",
     resumeFile: null,
     rules: {
-      required: value => !!value || "Required."
+      required: (value) => !!value || "Required.",
     },
     snackbar: false,
     snackbarText: "",
     btnLoading: false,
-    gotUser: false
+    gotUser: false,
   }),
   computed: {
-    avatar: function() {
+    avatar: function () {
       if (this.userData && this.userData.avatar) {
         return `https://static.codingame.com/servlet/fileservlet?format=profile_avatar&id=${this.userData.avatar}`;
       } else {
         return "https://static.codingame.com/assets/img_general_avatar.6f8c476b.png";
       }
     },
-    cgRank: function() {
+    cgRank: function () {
       return (
         this.userData.ranking.codingame.rank.toLocaleString() +
         "/" +
         this.userData.ranking.codingame.totalPlayers.toLocaleString()
       );
     },
-    clashRank: function() {
+    clashRank: function () {
       return (
         this.userData.ranking.clashOfCode.rank.toLocaleString() +
         "/" +
@@ -130,17 +131,17 @@ export default {
     },
     userData() {
       return this.$store.state.userData;
-    }
+    },
   },
   methods: {
-    clicked: async function() {
+    clicked: async function () {
       this.btnLoading = true;
       try {
         const response = await axios.get(`.netlify/functions/get-score`, {
           timeout: 10000,
           params: {
-            profile: this.profile
-          }
+            profile: this.profile,
+          },
         });
         this.$store.commit("addUserData", response.data);
         this.gotUser = true;
@@ -155,7 +156,7 @@ export default {
       }
 
       this.btnLoading = false;
-    }
-  }
+    },
+  },
 };
 </script>
