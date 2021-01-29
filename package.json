@@ -11,7 +11,7 @@
         "@middy/core": "^1.0.0",
         "@middy/http-error-handler": "^1.0.0",
         "@middy/http-security-headers": "^1.0.0",
-        "axios": "^0.19.2",
+        "axios": "^0.21.1",
         "core-js": "^2.6.5",
         "docxtemplater": "^3.17.9",
         "file-saver": "^2.0.2",
